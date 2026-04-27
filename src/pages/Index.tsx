@@ -1,16 +1,60 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useLenis } from "@/hooks/useLenis";
+import { SlideIntro } from "@/components/wedding/SlideIntro";
+import { PersonSlide } from "@/components/wedding/PersonSlide";
+import { SlideCouple } from "@/components/wedding/SlideCouple";
+import { SlideEnvelope } from "@/components/wedding/SlideEnvelope";
+import groomImg from "@/assets/groom.jpg";
+import brideImg from "@/assets/bride.jpg";
+import { useEffect } from "react";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  useLenis();
+
+  useEffect(() => {
+    document.title = "Aarav & Ananya — A Wedding Invitation";
+    const meta = document.querySelector('meta[name="description"]');
+    const content =
+      "A divine invitation to the wedding of Aarav & Ananya. Scroll through our story.";
+    if (meta) meta.setAttribute("content", content);
+    else {
+      const m = document.createElement("meta");
+      m.name = "description";
+      m.content = content;
+      document.head.appendChild(m);
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <main className="relative bg-background text-foreground">
+      <h1 className="sr-only">Aarav & Ananya — Wedding Invitation</h1>
+
+      <SlideIntro />
+
+      <PersonSlide
+        side="left"
+        image={groomImg}
+        title="The Groom"
+        name="Aarav Sharma"
+        intro="Son of Mr. Rajesh & Mrs. Priya Sharma. An architect by trade, a dreamer by heart — finding poetry in still mornings and quiet music."
+        meta="Bengaluru · 1995"
+        bg="cream"
+      />
+
+      <PersonSlide
+        side="right"
+        image={brideImg}
+        title="The Bride"
+        name="Ananya Iyer"
+        intro="Daughter of Mr. Suresh & Mrs. Lakshmi Iyer. A classical dancer and storyteller, who finds magic in the smallest moments of life."
+        meta="Chennai · 1997"
+        bg="royal"
+      />
+
+      <SlideCouple />
+
+      <SlideEnvelope />
+    </main>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
